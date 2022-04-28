@@ -9,5 +9,5 @@ navigation:
     url: setup
   - title: Time-to-first hospitalization (all causes)
     url: hosp
-  - title: test
+  -- title: test
     url: test
