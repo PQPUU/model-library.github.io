@@ -10,7 +10,7 @@ The model was established to analyse time-to-first hospitalization (all causes) 
 Data analyzed was from the BCG Vaccination for Healthcare Workers in COVID-19 Pandemic (ClinicalTrials.gov Identifier: [NCT04379336](https://clinicaltrials.gov/ct2/show/NCT04379336)).
 
 Model code:
-  - [model code (.mod)] (hospitalization_TTE/Executable_TTE_hospitalization_BCG_only.mod)
+  - [model code (.mod)] (https://github.com/LaurynasMockeliunas/lm.github.io/blob/6df2992b52baa04133f7197f05bf54378cdd3bb2/hospitalization_TTE/Executable_TTE_hospitalization_BCG_only.mod)
 
 ### 1. Fork the repository
 Fork the repository from [here](https://github.com/kbsezginel/gh-pages-template) by clicking the fork button on the top right corner.
