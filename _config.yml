@@ -5,8 +5,6 @@ show_downloads: FALSE
 navigation:
   - title: Home
     url: /
-  - title: Setup
-    url: setup
   - title: Time-to-first hospitalization (all causes)
     url: hosp_main
   -- title: test
