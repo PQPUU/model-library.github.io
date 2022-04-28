@@ -13,5 +13,5 @@ Data analyzed was from the BCG Vaccination for Healthcare Workers in COVID-19 Pa
 
 [Model code](https://github.com/LaurynasMockeliunas/lm.github.io/blob/aca7539efe92ab7422bd837277d0b471bc7a3c34/test.md)
 
-[Model code](../test)
+[Model code](../blob/test)
 
