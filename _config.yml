@@ -8,6 +8,6 @@ navigation:
   - title: Setup
     url: setup
   - title: Time-to-first hospitalization (all causes)
-    url: hosp
+    url: hosp_main
   -- title: test
     url: test
