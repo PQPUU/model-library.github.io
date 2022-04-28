@@ -10,5 +10,5 @@ The model was established to analyse time-to-first hospitalization (all causes) 
 Data analyzed was from the BCG Vaccination for Healthcare Workers in COVID-19 Pandemic (ClinicalTrials.gov Identifier: [NCT04379336](https://clinicaltrials.gov/ct2/show/NCT04379336)).
 
 ## Files
-[Model code](test)
+[Model code](/test)
 
