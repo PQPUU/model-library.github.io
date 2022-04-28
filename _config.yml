@@ -7,3 +7,5 @@ navigation:
     url: /
   - title: Setup
     url: setup
+  - title: Time-to-first hospitalization (all causes)
+    url: hosp
