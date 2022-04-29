@@ -27,4 +27,5 @@ df <- rbind(df %>% mutate(TIME = 0, #initiation record with time zero
 #creating a dataset
 write.csv(df, "TOTALHOSP_ITT_simulated.csv", quote = F, row.names = F)
 ```
-[Back](hosp_main)
+
+[Back](../hosp_main)

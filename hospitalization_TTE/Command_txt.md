@@ -10,4 +10,5 @@ update_inits Executable_TTE_hospitalization_BCG_only.mod -output_model=Simulatio
 ; Simulate data
 execute Simulations_TTE_hospitalization_BCG_only.mod -clean=0
 ```
-[Back](hosp_main)
+
+[Back](../hosp_main)

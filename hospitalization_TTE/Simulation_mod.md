@@ -149,4 +149,5 @@ $OMEGA  0  FIX
 $SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB=1
 ;Sim_end
 ```
-[Back](hosp_main)
+
+[Back](../hosp_main)

@@ -3003,4 +3003,5 @@ ID,DV,TIME,EVID,TYPE,FTIME,GROUP
 1000,0,459,0,2,459,2
 1000,0,459,0,3,459,2
 ```
-[Back](hosp_main)
+
+[Back](../hosp_main)
