@@ -2,9 +2,9 @@
 
 ## Commands used
 
-<a href="./Command_TTE_hospitalization_BCG_only.txt">Download here</a>
-<a href="./Simulated_raw_data_TTE_hospitalization_BCG_only.dat">Download here</a>
+<a download="download" href="./Command_TTE_hospitalization_BCG_only.txt">Download here</a>
 
+<a href="./Simulated_raw_data_TTE_hospitalization_BCG_only.dat">Download here</a>
 
 ```![image]
 ; Execution
