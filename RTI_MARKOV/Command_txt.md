@@ -5,7 +5,7 @@
 <a download="command_Markov_RTI_BCGonly" href="./command_Markov_RTI_BCGonly.txt">Download here</a>
 
 ```
-execute Executable_Markov_RTI_BCGonly.mod
+execute Execution_code_Markov_RTI_BCGonly.mod
 ```
 
 [Back](../rti_markov_main)

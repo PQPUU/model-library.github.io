@@ -27,5 +27,5 @@ The model was established to analyse time-to-first respiratory tract infection d
 
 - [Command](./RTI_TTE/Command_txt)
 
-- [Readme.txt](./RTI_TTE/readme_txt)
+- [Readme file](./RTI_TTE/readme_txt)
 

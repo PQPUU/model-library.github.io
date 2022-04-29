@@ -21,5 +21,5 @@ The model was established to analyse respiratory tract infection data over time 
 
 - [Command](./RTI_MARKOV/Command_txt)
 
-- [Readme.txt](./RTI_MARKOV/readme_txt)
+- [Readme file](./RTI_MARKOV/readme_txt)
 
