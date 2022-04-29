@@ -1,9 +1,9 @@
-# Time-to-first hospitalization (all causes)
+# Time-to-first PCR-confirmed COVID-19
 -------------------------
 
 ### Short description
 
-The model was established to analyse time-to-first hospitalization (all causes) data using parametric time-to-event analysis.
+The model was established to analyse time-to-first PCR-confirmed COVID-19 data using parametric time-to-event analysis.
 
 ### Characteristics
 - Data source:
@@ -13,19 +13,19 @@ The model was established to analyse time-to-first hospitalization (all causes) 
 
 ### Files
 
-- [Execution model code](./hospitalization_TTE/execution_mod)
+- [Execution model code](./C19_TTE/execution_mod)
 
-- [Model output](./hospitalization_TTE/Output_lst)
+- [Model output](./C19_TTE/Output_lst)
 
-- [Simulation model code](./hospitalization_TTE/Simulation_mod)
+- [Simulation model code](./C19_TTE/Simulation_mod)
 
-- [Simulated dataset](./hospitalization_TTE/Simulated_data_dat)
+- [Simulated dataset](./C19_TTE/Simulated_data_dat)
 
-- [Dataset preparation script](./hospitalization_TTE/dataset_preparation_r)
+- [Dataset preparation script](./C19_TTE/dataset_preparation_r)
 
-- [Dataset example](./hospitalization_TTE/example_dataset_csv)
+- [Dataset example](./C19_TTE/example_dataset_csv)
 
-- [Command](./hospitalization_TTE/Command_txt)
+- [Command](./C19_TTE/Command_txt)
 
-- [Readme.txt](./hospitalization_TTE/readme_txt)
+- [Readme file](./C19_TTE/readme_txt)
 
