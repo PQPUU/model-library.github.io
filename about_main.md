@@ -1,4 +1,4 @@
-# Time-to-first hospitalization (all causes)
+# About the model library
 -------------------------
 
 The model library is established and curated by Pharmacokinetics and Quantitative Pharmacology group, Department of Pharmaceutical Biosciences, Uppsala University in collaboration with TASK South Africa.
