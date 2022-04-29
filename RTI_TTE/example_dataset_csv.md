@@ -3009,6 +3009,6 @@ ID,DV,TIME,EVID,TYPE,FTIME,GROUP
 
 ```
 
-[Back](../c19_tte_main)
+[Back](../rti_tte_main)
 
 [Home](../../model-library.github.io/)
