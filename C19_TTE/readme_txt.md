@@ -20,4 +20,4 @@ Simulated_dataset_TTE_COVID-19_BCG_only.csv - example of the dataset structure c
 Command_TTE_COVID-19_BCG_only.txt - commands used
 ```
 
-[Back](../c19_tte_main)
+[Back](../c19_tte_main/)
