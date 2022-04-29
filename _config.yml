@@ -3,15 +3,15 @@ title: Model library
 description: Pharmacometric model library
 show_downloads: FALSE
 navigation:
-  - title: Home
-    url: /
-  - title: Time-to-first hospitalization (all causes)
-    url: hospitalization_tte_main
-  - title: Time-to-first PCR confirmed COVID-19
-    url: c19_tte_main
-  - title: Time-to-first respiratory tract infection
-    url: rti_tte_main
-  - title: Respiratory tract infection over time Markov model
-    url: rti_markov_main
-  - title: About
-    url: about_main
+    - title: Home
+      url: /
+    - title: Time-to-first hospitalization (all causes)
+      url: hospitalization_tte_main
+    - title: Time-to-first PCR confirmed COVID-19
+      url: c19_tte_main
+    - title: Time-to-first respiratory tract infection
+      url: rti_tte_main
+    - title: Respiratory tract infection over time Markov model
+      url: rti_markov_main
+    - title: About
+      url: about_main
