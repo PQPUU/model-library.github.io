@@ -5,6 +5,28 @@
 <a href="./Output_TTE_hospitalization_BCG_only.lst">Download here</a>
 
 ```
+Tue Apr 26 11:04:48 CEST 2022
+$PROBLEM    Time-to-event analysis of hospitalization (all causes)
+;           data,ITT dataset
+; the same model code for PP dataset
+
+; MTIME is used for simulations https://www.page-meeting.org/?abstract=3166
+
+; To create simulation dataset for VPC, use update_inits command from PsN with -flip_comments option
+$INPUT      ID DV TIME EVID TYPE FTIME GROUP
+; DV - status in the original data, categorical, DV=0 is "no event", DV=1 "event"
+
+; TIME - time in the original data, unit=days
+
+; EVID - Event ID, 3=the first record of the individual, 0=other records
+
+; TYPE - 1 - time zero, 2=event/censoring time, 3=maximum time for simulations
+
+; FTIME - final time for VPCs
+
+; GROUP - vaccination group, 1=placebo, 2=BCG
+$DATA      TOTALHOSP_ITT_20211203.csv IGNORE=@ IGNORE=(TYPE.EQ.3)
+
 ;Sim_start
 
 ;IGNORE=(TYPE.EQ.2)
@@ -586,7 +608,6 @@ Days until program expires : 108
  #CPUT: Total CPU Time in Seconds,        0.705
 Stop Time:
 Tue Apr 26 11:05:01 CEST 2022
-
 ```
 
 [Back](../hospitalization_tte_main)
