@@ -1,4 +1,4 @@
-$PROBLEM    Time-to-event analysis of hospitalization (all causes) data,ITT dataset
+$PROBLEM    Time-to-event analysis of PCR-confirmed COVID-19 data,ITT dataset
 ; the same model code for PP dataset
 ; MTIME is used for simulations https://www.page-meeting.org/?abstract=3166
 ; To create simulation dataset for VPC, use update_inits command from PsN with -flip_comments option
@@ -9,7 +9,7 @@ $INPUT      ID DV TIME EVID TYPE FTIME GROUP
 ; TYPE - 1 - time zero, 2=event/censoring time, 3=maximum time for simulations
 ; FTIME - final time for VPCs
 ; GROUP - vaccination group, 1=placebo, 2=BCG
-$DATA      TOTALHOSP_ITT_20211203.csv IGNORE=@
+$DATA      COVID19_TTE_ITT_20211203.csv IGNORE=@
 ;Sim_start
 IGNORE=(TYPE.EQ.3)
 ;IGNORE=(TYPE.EQ.2)
@@ -19,38 +19,39 @@ $SUBROUTINE ADVAN=13 TOL=9
 ;Sim_end
 $MODEL      COMP=(HAZARD)
 $PK
- IF(GROUP.EQ.1) RFGROUP = 0
- IF(GROUP.EQ.2) RFGROUP = THETA(2)
- BASE = THETA(1)*EXP(ETA(1))/100 
+  IF(GROUP.EQ.1) RFGROUP = 0
+  IF(GROUP.EQ.2) RFGROUP = THETA(3)
+  LAM = THETA(1)*EXP(ETA(1))/100 ;the ETA is a placeholder here
+  SHP = THETA(2) ; shape
 ;Sim_start
 ;;;;;;;;; THE SIMULATION PART FOR TTE SIMULATIONS ;;
-; IF (ICALL.EQ.4) THEN                            ; The event time sim $problem
-;     IF (NEWIND.EQ.0) THEN                       ; Only for the first record
-;        COM(6)  =  1                            ; Reset simulation ID counter
-;        COM(4)  =  459                           ; Set max time/censoring time in the dataset
+; IF (ICALL.EQ.4) THEN                         ; The event time sim $problem
+;     IF (NEWIND.EQ.0) THEN                    ; Only for the first record
+;         COM(6)  =  1                           ; Reset simulation ID counter
+;        COM(4)  =  459                         ; Set max time/censoring time
 ;     ENDIF
-;     IF (NEWIND.EQ.1) THEN                       ; For every new ind except first in dataset
-;         ICOUNT  =  COM(6) + 1                   ; Update individual counter over simulations
+;     IF (NEWIND.EQ.1) THEN                    ; For every new ind except first in dataset
+;         ICOUNT  =  COM(6) + 1                  ; Update individual counter over simulations
 ;         COM(6)  =  ICOUNT
 ;     ENDIF
-;     IF (NEWIND.NE.2) THEN                       ; For every new individual
+;     IF (NEWIND.NE.2) THEN                    ; For every new individual
 ;         CALL RANDOM(2,R)
-;         COM(3)  =  -1                           ; Variable for survival at event time
-;         COM(2)  =  R                            ; Store the random number
-;         COM(1)  =  -1                           ; Variable for the event time
-;         COM(7)  =  0                            ; Individual event counter
+;         COM(3)  =  -1                          ; Variable for survival at event time
+;         COM(2)  =  R                           ; Store the random number
+;         COM(1)  =  -1                          ; Variable for the event time
+;         COM(7)  =  0                           ; Individual event counter
 ;     ENDIF
 ; ENDIF
 ;;;;;;---------MTIME for increasing precision in $DES --------
 ; IF (NEWIND.NE.2) THEN
-; TEMP = 0
+;     TEMP = 0
 ; ENDIF
 ; TEMP = TEMP+0.1
 ; MTIME(1) = TEMP
 ; MTDIFF = 1
 ;Sim_end
 $DES
- DADT(1) = BASE*EXP(RFGROUP)
+DADT(1) = LAM*EXP(SHP*T)*EXP(RFGROUP)
 ;Sim_start
 ; SUR = EXP(-A(1))
 ; IF(COM(2).GT.SUR.AND.COM(1).EQ.-1) THEN ; If event save event time in COM(1)
@@ -64,7 +65,7 @@ $ERROR
  CHZ = A(1)-OLDCHZ                  ;cumulative hazard from previous time point in data set
  OLDCHZ = A(1)                      ;rename old cumulative hazard
  SUR = EXP(-CHZ)                    ;survival probability
- HAZNOW=BASE*EXP(RFGROUP)             ; rate of event each time pt NB: update with each new model
+ HAZNOW=LAM*EXP(SHP*TIME)*EXP(RFGROUP)             ; rate of event each time pt NB: update with each new model
  IF(DV.EQ.0) Y = SUR                ;censored event (prob of survival)
  IF(DV.NE.0) Y = SUR*HAZNOW         ;prob density function of event
 ;"FIRST
@@ -125,14 +126,14 @@ $ERROR
 ;" CLOSE(99) ! Close File pointer
 ;" ENDIF
 ;Sim_end
-$THETA  (0,0.0114916) ; BASE/100
-$THETA  0.309978 ; RFGROUP
+$THETA  (0,0.0825432) ; LAMBDA/100
+ -0.00219953 ; ALPHA
+ 0.070314 ; RFGROUP
 $OMEGA  0  FIX
 ;Sim_start
 $ESTIMATION MAXEVAL=9990 METHOD=0 LIKE PRINT=1 SIGL=9 NSIG=3
 $COVARIANCE PRINT=E
-$TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
+$TABLE      ID TIME SUR HAZNOW LAM SHP RFGROUP EVID NOPRINT ONEHEADER
             FILE=mytab
 ;$SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB = 1
 ;Sim_end
-
