@@ -2,7 +2,7 @@
 
 ## Execution model
 
-<a href="./Executable_TTE_hospitalization_BCG_only.mod">Download here</a>
+<a href="./Execution_code_TTE_hospitalization_BCG_only.mod">Download here</a>
 
 ```
 $PROBLEM    Time-to-event analysis of hospitalization (all causes) data, ITT dataset
@@ -145,4 +145,4 @@ $TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
 ```
 
 
-[Back](../hosp_main)
+[Back](../hospitalization_tte_main)

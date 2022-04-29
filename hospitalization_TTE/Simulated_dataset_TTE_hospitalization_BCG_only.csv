@@ -1,10 +1,3 @@
-# Time-to-first hospitalization
-
-## Example dataset
-
-<a href="./Simulated_dataset_TTE_hospitalization_BCG_only.csv">Download here</a>
-
-```
 ID,DV,TIME,EVID,TYPE,FTIME,GROUP
 1,0,0,3,1,459,1
 1,0,459,0,2,459,1
@@ -3006,6 +2999,3 @@ ID,DV,TIME,EVID,TYPE,FTIME,GROUP
 1000,0,0,3,1,459,2
 1000,0,459,0,2,459,2
 1000,0,459,0,3,459,2
-```
-
-[Back](../hospitalization_tte_main)

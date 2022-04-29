@@ -1,9 +1,5 @@
 # Time-to-first hospitalization
-
 ## Commands used
-
-<a href="./Command_TTE_hospitalization_BCG_only_txt">Download here</a>
-
 ```![image]
 ; Execution
 execute Executable_TTE_hospitalization_BCG_only.mod
@@ -15,4 +11,4 @@ update_inits Executable_TTE_hospitalization_BCG_only.mod -output_model=Simulatio
 execute Simulations_TTE_hospitalization_BCG_only.mod -clean=0
 ```
 
-[Back](../hospitalization_tte_main)
+[Back](../hosp_main)

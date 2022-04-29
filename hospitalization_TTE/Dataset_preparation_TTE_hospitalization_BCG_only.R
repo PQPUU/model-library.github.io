@@ -1,10 +1,3 @@
-# Time-to-first hospitalization
-
-## Dataset preparation script (R language)
-
-<a href="./Dataset_preparation_TTE_hospitalization_BCG_only.R">Download here</a>
-
-```
 library(dplyr)
 
 df <- read.table("simtab.dat", header = TRUE) %>% #reading in the simulated data, one record per ID
@@ -30,6 +23,3 @@ df <- rbind(df %>% mutate(TIME = 0, #initiation record with time zero
 
 #creating a dataset
 write.csv(df, "TOTALHOSP_ITT_simulated.csv", quote = F, row.names = F)
-```
-
-[Back](../hospitalization_tte_main)

@@ -2,8 +2,9 @@
 
 ## Model output
 
-```
+<a href="./Output_TTE_hospitalization_BCG_only.lst">Download here</a>
 
+```
 ;Sim_start
 
 ;IGNORE=(TYPE.EQ.2)
@@ -588,4 +589,4 @@ Tue Apr 26 11:05:01 CEST 2022
 
 ```
 
-[Back](../hosp_main)
+[Back](../hospitalization_tte_main)

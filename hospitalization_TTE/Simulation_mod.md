@@ -1,7 +1,8 @@
 # Time-to-first hospitalization
+
 ## Simulation model
 
-<a href="./Simulations_TTE_hospitalization_BCG_only.mod">style.css</a>
+<a href="./Simulation_code_TTE_hospitalization_BCG_only.mod">Download here</a>
 
 ```
 $PROBLEM    Time-to-event analysis of hospitalization (all causes)
@@ -153,4 +154,4 @@ $SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB=1
 ;Sim_end
 ```
 
-[Back](../hosp_main)
+[Back](../hospitalization_tte_main)
