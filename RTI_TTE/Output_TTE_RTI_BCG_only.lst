@@ -1,10 +1,3 @@
-# Time-to-first respiratory tract infection
-
-## Model output
-
-<a href="./Output_TTE_RTI_BCG_only.lst">Download here</a>
-
-```
 Tue Apr 26 11:31:48 CEST 2022
 $PROBLEM    Time-to-event analysis of respiratory tract infection
 ;           data,ITT dataset
@@ -626,8 +619,3 @@ Days until program expires : 108
  #CPUT: Total CPU Time in Seconds,        2.107
 Stop Time:
 Tue Apr 26 11:32:04 CEST 2022
-```
-
-[Back](../c19_tte_main)
-
-[Home](../../model-library.github.io/)

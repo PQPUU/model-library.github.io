@@ -1,4 +1,4 @@
-# Time-to-first PCR-confirmed COVID-19
+# Time-to-first respiratory tract infection
 
 ## Commands used
 

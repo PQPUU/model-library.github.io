@@ -1,10 +1,3 @@
-# Time-to-first respiratory tract infection
-
-## Execution model
-
-<a href="./Execution_code_TTE_RTI_BCG_only.mod">Download here</a>
-
-```
 $PROBLEM    Time-to-event analysis of respiratory tract infection data, ITT dataset
 ; the same model code for PP dataset
 ; MTIME is used for simulations https://www.page-meeting.org/?abstract=3166
@@ -145,8 +138,4 @@ $TABLE      ID TIME SUR HAZNOW LAM SHP RFGROUP EVID NOPRINT ONEHEADER
 ;$SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB = 1
 
 ;Sim_end
-```
 
-[Back](../c19_tte_main)
-
-[Home](../../model-library.github.io/)

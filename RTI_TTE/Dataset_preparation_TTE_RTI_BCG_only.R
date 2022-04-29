@@ -1,10 +1,3 @@
-# Time-to-first respiratory tract infection
-
-## Dataset preparation script (R language)
-
-<a href="./Dataset_preparation_TTE_RTI_BCG_only.R">Download here</a>
-
-```
 library(dplyr)
 
 df <- read.table("Simulated_raw_data_TTE_RTI_BCG_only.dat", header = TRUE) %>% #reading in the simulated data, one record per ID
@@ -30,8 +23,3 @@ df <- rbind(df %>% mutate(TIME = 0, #initiation record with time zero
 
 #creating a dataset
 write.csv(df, "Simulated_dataset_TTE_RTI_BCG_only.csv", quote = F, row.names = F)
-```
-
-[Back](../rti_tte_main)
-
-[Home](../../model-library.github.io/)
