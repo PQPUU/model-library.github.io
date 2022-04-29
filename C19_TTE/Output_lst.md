@@ -1,10 +1,32 @@
-# Time-to-first hospitalization
+# Time-to-first PCR-confirmed COVID-19
 
 ## Model output
 
-<a href="./Output_TTE_hospitalization_BCG_only.lst">Download here</a>
+<a href="./Output_TTE_COVID-19_BCG_only.lst">Download here</a>
 
 ```
+Tue Apr 26 11:22:03 CEST 2022
+$PROBLEM    Time-to-event analysis of PCR-confirmed COVID-19 data,ITT
+;           dataset
+; the same model code for PP dataset
+
+; MTIME is used for simulations https://www.page-meeting.org/?abstract=3166
+
+; To create simulation dataset for VPC, use update_inits command from PsN with -flip_comments option
+$INPUT      ID DV TIME EVID TYPE FTIME GROUP
+; DV - status in the original data, categorical, DV=0 is "no event", DV=1 "event"
+
+; TIME - time in the original data, unit=days
+
+; EVID - Event ID, 3=the first record of the individual, 0=other records
+
+; TYPE - 1 - time zero, 2=event/censoring time, 3=maximum time for simulations
+
+; FTIME - final time for VPCs
+
+; GROUP - vaccination group, 1=placebo, 2=BCG
+$DATA      COVID19_TTE_ITT_20211203.csv IGNORE=@ IGNORE=(TYPE.EQ.3)
+
 ;Sim_start
 
 ;IGNORE=(TYPE.EQ.2)
@@ -16,38 +38,39 @@ $SUBROUTINE ADVAN=13 TOL=9
 ;Sim_end
 $MODEL      COMP=(HAZARD)
 $PK
- IF(GROUP.EQ.1) RFGROUP = 0
- IF(GROUP.EQ.2) RFGROUP = THETA(2)
- BASE = THETA(1)*EXP(ETA(1))/100 
+  IF(GROUP.EQ.1) RFGROUP = 0
+  IF(GROUP.EQ.2) RFGROUP = THETA(3)
+  LAM = THETA(1)*EXP(ETA(1))/100 ;the ETA is a placeholder here
+  SHP = THETA(2) ; shape
 ;Sim_start
 ;;;;;;;;; THE SIMULATION PART FOR TTE SIMULATIONS ;;
-; IF (ICALL.EQ.4) THEN                            ; The event time sim $problem
-;     IF (NEWIND.EQ.0) THEN                       ; Only for the first record
-;        COM(6)  =  1                            ; Reset simulation ID counter
-;        COM(4)  =  459                           ; Set max time/censoring time in the dataset
+; IF (ICALL.EQ.4) THEN                         ; The event time sim $problem
+;     IF (NEWIND.EQ.0) THEN                    ; Only for the first record
+;         COM(6)  =  1                           ; Reset simulation ID counter
+;        COM(4)  =  459                         ; Set max time/censoring time
 ;     ENDIF
-;     IF (NEWIND.EQ.1) THEN                       ; For every new ind except first in dataset
-;         ICOUNT  =  COM(6) + 1                   ; Update individual counter over simulations
+;     IF (NEWIND.EQ.1) THEN                    ; For every new ind except first in dataset
+;         ICOUNT  =  COM(6) + 1                  ; Update individual counter over simulations
 ;         COM(6)  =  ICOUNT
 ;     ENDIF
-;     IF (NEWIND.NE.2) THEN                       ; For every new individual
+;     IF (NEWIND.NE.2) THEN                    ; For every new individual
 ;         CALL RANDOM(2,R)
-;         COM(3)  =  -1                           ; Variable for survival at event time
-;         COM(2)  =  R                            ; Store the random number
-;         COM(1)  =  -1                           ; Variable for the event time
-;         COM(7)  =  0                            ; Individual event counter
+;         COM(3)  =  -1                          ; Variable for survival at event time
+;         COM(2)  =  R                           ; Store the random number
+;         COM(1)  =  -1                          ; Variable for the event time
+;         COM(7)  =  0                           ; Individual event counter
 ;     ENDIF
 ; ENDIF
 ;;;;;;---------MTIME for increasing precision in $DES --------
 ; IF (NEWIND.NE.2) THEN
-; TEMP = 0
+;     TEMP = 0
 ; ENDIF
 ; TEMP = TEMP+0.1
 ; MTIME(1) = TEMP
 ; MTDIFF = 1
 ;Sim_end
 $DES
- DADT(1) = BASE*EXP(RFGROUP)
+DADT(1) = LAM*EXP(SHP*T)*EXP(RFGROUP)
 ;Sim_start
 ; SUR = EXP(-A(1))
 ; IF(COM(2).GT.SUR.AND.COM(1).EQ.-1) THEN ; If event save event time in COM(1)
@@ -61,7 +84,7 @@ $ERROR
  CHZ = A(1)-OLDCHZ                  ;cumulative hazard from previous time point in data set
  OLDCHZ = A(1)                      ;rename old cumulative hazard
  SUR = EXP(-CHZ)                    ;survival probability
- HAZNOW=BASE*EXP(RFGROUP)             ; rate of event each time pt NB: update with each new model
+ HAZNOW=LAM*EXP(SHP*TIME)*EXP(RFGROUP)             ; rate of event each time pt NB: update with each new model
  IF(DV.EQ.0) Y = SUR                ;censored event (prob of survival)
  IF(DV.NE.0) Y = SUR*HAZNOW         ;prob density function of event
 ;"FIRST
@@ -122,13 +145,14 @@ $ERROR
 ;" CLOSE(99) ! Close File pointer
 ;" ENDIF
 ;Sim_end
-$THETA  (0,0.0114916) ; BASE/100
-$THETA  0.309978 ; RFGROUP
+$THETA  (0,0.0825432) ; LAMBDA/100
+ -0.00219953 ; ALPHA
+ 0.070314 ; RFGROUP
 $OMEGA  0  FIX
 ;Sim_start
 $ESTIMATION MAXEVAL=9990 METHOD=0 LIKE PRINT=1 SIGL=9 NSIG=3
 $COVARIANCE PRINT=E
-$TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
+$TABLE      ID TIME SUR HAZNOW LAM SHP RFGROUP EVID NOPRINT ONEHEADER
             FILE=mytab
 ;$SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB = 1
 
@@ -160,7 +184,7 @@ Days until program expires : 108
  PERFORMED BY NOUS INFOSYSTEMS.
 
  PROBLEM NO.:         1
- Time-to-event analysis of hospitalization (all causes)
+ Time-to-event analysis of PCR-confirmed COVID-19 data,ITT
 0DATA CHECKOUT RUN:              NO
  DATA SET LOCATED ON UNIT NO.:    2
  THIS UNIT TO BE REWOUND:        NO
@@ -174,20 +198,21 @@ Days until program expires : 108
 0LABELS FOR DATA ITEMS:
  ID DV TIME EVID TYPE FTIME GROUP MDV
 0(NONBLANK) LABELS FOR PRED-DEFINED ITEMS:
- RFGROUP BASE SUR HAZNOW
+ RFGROUP LAM SHP SUR HAZNOW
 0FORMAT FOR DATA:
  (7E5.0,1F2.0)
 
  TOT. NO. OF OBS RECS:     1000
  TOT. NO. OF INDIVIDUALS:     1000
-0LENGTH OF THETA:   2
+0LENGTH OF THETA:   3
 0DEFAULT THETA BOUNDARY TEST OMITTED:    NO
 0OMEGA HAS SIMPLE DIAGONAL FORM WITH DIMENSION:   1
 0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO
 0INITIAL ESTIMATE OF THETA:
  LOWER BOUND    INITIAL EST    UPPER BOUND
-  0.0000E+00     0.1149E-01     0.1000E+07
- -0.1000E+07     0.3100E+00     0.1000E+07
+  0.0000E+00     0.8254E-01     0.1000E+07
+ -0.1000E+07    -0.2200E-02     0.1000E+07
+ -0.1000E+07     0.7031E-01     0.1000E+07
 0INITIAL ESTIMATE OF OMEGA:
  0.0000E+00
 0OMEGA CONSTRAINED TO BE THIS INITIAL ESTIMATE
@@ -228,12 +253,12 @@ Days until program expires : 108
  RFORMAT:
  FIXED_EFFECT_ETAS:
 0USER-CHOSEN ITEMS:
- ID TIME SUR HAZNOW BASE RFGROUP EVID
+ ID TIME SUR HAZNOW LAM SHP RFGROUP EVID
 1DOUBLE PRECISION PREDPP VERSION 7.5.0
 
  GENERAL NONLINEAR KINETICS MODEL WITH STIFF/NONSTIFF EQUATIONS (LSODA, ADVAN13)
 0MODEL SUBROUTINE USER-SUPPLIED - ID NO. 9999
-0MAXIMUM NO. OF BASIC PK PARAMETERS:   2
+0MAXIMUM NO. OF BASIC PK PARAMETERS:   3
 0COMPARTMENT ATTRIBUTES
  COMPT. NO.   FUNCTION   INITIAL    ON/OFF      DOSE      DEFAULT    DEFAULT
                          STATUS     ALLOWED    ALLOWED    FOR DOSE   FOR OBS.
@@ -326,59 +351,65 @@ Days until program expires : 108
  MONITORING OF SEARCH:
 
 
-0ITERATION NO.:    0    OBJECTIVE VALUE:   929.962916017606        NO. OF FUNC. EVALS.:   3
- CUMULATIVE NO. OF FUNC. EVALS.:        3
- NPARAMETR:  1.1492E-02  3.0998E-01
- PARAMETER:  1.0000E-01  1.0000E-01
- GRADIENT:  -1.1817E-03  2.5162E-03
+0ITERATION NO.:    0    OBJECTIVE VALUE:   3188.67392224564        NO. OF FUNC. EVALS.:   4
+ CUMULATIVE NO. OF FUNC. EVALS.:        4
+ NPARAMETR:  8.2543E-02 -2.1995E-03  7.0314E-02
+ PARAMETER:  1.0000E-01 -1.0000E-01  1.0000E-01
+ GRADIENT:   4.9316E-03 -8.2061E-02  2.8813E-03
 
-0ITERATION NO.:    1    OBJECTIVE VALUE:   929.962916010575        NO. OF FUNC. EVALS.:   7
- CUMULATIVE NO. OF FUNC. EVALS.:       10
- NPARAMETR:  1.1492E-02  3.0996E-01
- PARAMETER:  1.0000E-01  9.9994E-02
- GRADIENT:  -1.9570E-03 -2.5327E-04
+0ITERATION NO.:    1    OBJECTIVE VALUE:   3188.67392152180        NO. OF FUNC. EVALS.:  10
+ CUMULATIVE NO. OF FUNC. EVALS.:       14
+ NPARAMETR:  8.2543E-02 -2.1992E-03  7.0314E-02
+ PARAMETER:  9.9999E-02 -9.9984E-02  9.9999E-02
+ GRADIENT:   2.5099E-02  1.0871E-02  1.1410E-02
 
-0ITERATION NO.:    2    OBJECTIVE VALUE:   929.962915993323        NO. OF FUNC. EVALS.:   5
- CUMULATIVE NO. OF FUNC. EVALS.:       15
- NPARAMETR:  1.1492E-02  3.0996E-01
- PARAMETER:  1.0002E-01  9.9996E-02
- GRADIENT:  -1.7872E-04  3.3526E-03
+0ITERATION NO.:    2    OBJECTIVE VALUE:   3188.67392139952        NO. OF FUNC. EVALS.:   8
+ CUMULATIVE NO. OF FUNC. EVALS.:       22
+ NPARAMETR:  8.2542E-02 -2.1993E-03  7.0311E-02
+ PARAMETER:  9.9990E-02 -9.9988E-02  9.9995E-02
+ GRADIENT:   1.6033E-02 -2.3714E-02  5.9239E-03
 
-0ITERATION NO.:    3    OBJECTIVE VALUE:   929.962915970777        NO. OF FUNC. EVALS.:   5
- CUMULATIVE NO. OF FUNC. EVALS.:       20
- NPARAMETR:  1.1492E-02  3.0992E-01
- PARAMETER:  1.0005E-01  9.9982E-02
- GRADIENT:   1.4499E-04  8.1292E-04
+0ITERATION NO.:    3    OBJECTIVE VALUE:   3188.67391969593        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:       28
+ NPARAMETR:  8.2532E-02 -2.1984E-03  7.0273E-02
+ PARAMETER:  9.9864E-02 -9.9947E-02  9.9942E-02
+ GRADIENT:   1.3092E-02  4.6703E-02  4.4440E-03
 
-0ITERATION NO.:    4    OBJECTIVE VALUE:   929.962915970777        NO. OF FUNC. EVALS.:   4
- CUMULATIVE NO. OF FUNC. EVALS.:       24
- NPARAMETR:  1.1492E-02  3.0992E-01
- PARAMETER:  1.0005E-01  9.9982E-02
- GRADIENT:  -3.5374E-06 -4.8072E-06
+0ITERATION NO.:    4    OBJECTIVE VALUE:   3188.67391959708        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:       34
+ NPARAMETR:  8.2529E-02 -2.1984E-03  7.0310E-02
+ PARAMETER:  9.9833E-02 -9.9947E-02  9.9995E-02
+ GRADIENT:   5.3123E-03  2.0778E-02  5.7419E-03
 
-0ITERATION NO.:    5    OBJECTIVE VALUE:   929.962915970777        NO. OF FUNC. EVALS.:   0
- CUMULATIVE NO. OF FUNC. EVALS.:       24
- NPARAMETR:  1.1492E-02  3.0992E-01
- PARAMETER:  1.0005E-01  9.9982E-02
- GRADIENT:  -3.5374E-06 -4.8072E-06
+0ITERATION NO.:    5    OBJECTIVE VALUE:   3188.67391959708        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:       40
+ NPARAMETR:  8.2529E-02 -2.1984E-03  7.0310E-02
+ PARAMETER:  9.9833E-02 -9.9947E-02  9.9995E-02
+ GRADIENT:   4.3307E-03  1.4118E-02  2.6085E-03
+
+0ITERATION NO.:    6    OBJECTIVE VALUE:   3188.67391959708        NO. OF FUNC. EVALS.:   0
+ CUMULATIVE NO. OF FUNC. EVALS.:       40
+ NPARAMETR:  8.2529E-02 -2.1984E-03  7.0310E-02
+ PARAMETER:  9.9833E-02 -9.9947E-02  9.9995E-02
+ GRADIENT:   4.3307E-03  1.4118E-02  2.6085E-03
 
  #TERM:
 0MINIMIZATION SUCCESSFUL
- NO. OF FUNCTION EVALUATIONS USED:       24
- NO. OF SIG. DIGITS IN FINAL EST.:  6.3
+ NO. OF FUNCTION EVALUATIONS USED:       40
+ NO. OF SIG. DIGITS IN FINAL EST.:  3.8
   
  TOTAL DATA POINTS NORMALLY DISTRIBUTED (N):            0
  N*LOG(2PI) CONSTANT TO OBJECTIVE FUNCTION:    0.0000000000000000     
- OBJECTIVE FUNCTION VALUE WITHOUT CONSTANT:    929.96291597077732     
- OBJECTIVE FUNCTION VALUE WITH CONSTANT:       929.96291597077732     
+ OBJECTIVE FUNCTION VALUE WITHOUT CONSTANT:    3188.6739195970831     
+ OBJECTIVE FUNCTION VALUE WITH CONSTANT:       3188.6739195970831     
  REPORTED OBJECTIVE FUNCTION DOES NOT CONTAIN CONSTANT
   
  TOTAL EFFECTIVE ETAS (NIND*NETA):                             0
   
  #TERE:
- Elapsed estimation  time in seconds:     0.23
- Elapsed covariance  time in seconds:     0.12
- Elapsed postprocess time in seconds:     0.04
+ Elapsed estimation  time in seconds:     0.83
+ Elapsed covariance  time in seconds:     0.49
+ Elapsed postprocess time in seconds:     0.07
 1
  
  
@@ -412,7 +443,7 @@ Days until program expires : 108
 
 
 
- #OBJV:********************************************      929.963       **************************************************
+ #OBJV:********************************************     3188.674       **************************************************
 1
  ************************************************************************************************************************
  ********************                                                                                ********************
@@ -426,9 +457,9 @@ Days until program expires : 108
  THETA - VECTOR OF FIXED EFFECTS PARAMETERS   *********
 
 
-         TH 1      TH 2     
+         TH 1      TH 2      TH 3     
  
-         1.15E-02  3.10E-01
+         8.25E-02 -2.20E-03  7.03E-02
  
 
 
@@ -464,9 +495,9 @@ Days until program expires : 108
  THETA - VECTOR OF FIXED EFFECTS PARAMETERS   *********
 
 
-         TH 1      TH 2     
+         TH 1      TH 2      TH 3     
  
-         2.58E-03  2.96E-01
+         1.21E-02  6.92E-04  1.45E-01
  
 
 
@@ -498,16 +529,19 @@ Days until program expires : 108
  ************************************************************************************************************************
  
 
-            TH 1      TH 2      OM11  
+            TH 1      TH 2      TH 3      OM11  
  
  TH 1
-+        6.63E-06
++        1.47E-04
  
  TH 2
-+       -5.77E-04  8.73E-02
++       -5.92E-06  4.79E-07
+ 
+ TH 3
++       -9.10E-04  1.24E-06  2.10E-02
  
  OM11
-+       ......... ......... .........
++       ......... ......... ......... .........
  
 1
  ************************************************************************************************************************
@@ -518,16 +552,19 @@ Days until program expires : 108
  ************************************************************************************************************************
  
 
-            TH 1      TH 2      OM11  
+            TH 1      TH 2      TH 3      OM11  
  
  TH 1
-+        2.58E-03
++        1.21E-02
  
  TH 2
-+       -7.58E-01  2.96E-01
++       -7.05E-01  6.92E-04
+ 
+ TH 3
++       -5.18E-01  1.24E-02  1.45E-01
  
  OM11
-+       ......... ......... .........
++       ......... ......... ......... .........
  
 1
  ************************************************************************************************************************
@@ -538,16 +575,19 @@ Days until program expires : 108
  ************************************************************************************************************************
  
 
-            TH 1      TH 2      OM11  
+            TH 1      TH 2      TH 3      OM11  
  
  TH 1
-+        3.55E+05
++        2.79E+04
  
  TH 2
-+        2.35E+03  2.70E+01
++        3.42E+05  6.28E+06
+ 
+ TH 3
++        1.19E+03  1.45E+04  9.83E+01
  
  OM11
-+       ......... ......... .........
++       ......... ......... ......... .........
  
 1
  
@@ -578,15 +618,15 @@ Days until program expires : 108
  ************************************************************************************************************************
  
 
-             1         2
+             1         2         3
  
-         2.42E-01  1.76E+00
+         1.31E-01  9.88E-01  1.88E+00
  
- Elapsed finaloutput time in seconds:     0.09
- #CPUT: Total CPU Time in Seconds,        0.705
+ Elapsed finaloutput time in seconds:     0.07
+ #CPUT: Total CPU Time in Seconds,        1.711
 Stop Time:
-Tue Apr 26 11:05:01 CEST 2022
+Tue Apr 26 11:22:18 CEST 2022
 
 ```
 
-[Back](../hospitalization_tte_main)
+[Back](../c19_tte_main)

@@ -1,4 +1,4 @@
-# Time-to-first hospitalization
+# Time-to-first PCR-confirmed COVID-19
 
 ## Dataset preparation script (R language)
 
