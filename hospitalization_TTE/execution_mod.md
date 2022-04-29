@@ -2,8 +2,6 @@
 
 ## Execution model
 
-<a download="download" href="https://raw.githubusercontent.com/LaurynasMockeliunas/lm.github.io/master/hospitalization_TTE/simtab.dat">Download File</a>
-
 ```
 $PROBLEM    Time-to-event analysis of hospitalization (all causes) data, ITT dataset
 ; the same model code for PP dataset
@@ -143,4 +141,4 @@ $TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
 ;$SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB = 1
 ;Sim_end
 ```
-[Back](hosp_main)
+[Back](../hosp_main)
