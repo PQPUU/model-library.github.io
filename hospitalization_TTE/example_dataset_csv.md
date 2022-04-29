@@ -1,6 +1,5 @@
 # Time-to-first hospitalization
-## Execution model
-
+## Example dataset
 ```
 ID,DV,TIME,EVID,TYPE,FTIME,GROUP
 1,0,0,3,1,459,1
