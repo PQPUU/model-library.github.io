@@ -15,4 +15,4 @@ update_inits Execution_code_TTE_COVID-19_BCG_only.mod -output_model=Simulation_c
 execute Simulation_code_TTE_COVID-19_BCG_only.mod -clean=0
 ```
 
-[Back](../C19_tte_main)
+[Back](../c19_tte_main)
