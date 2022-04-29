@@ -1,6 +1,6 @@
 # Time-to-first hospitalization
 
-## Readme.txt file
+## Readme file
 
 <a download="readme_TTE_hospitalization_BCG_only" href="./readme_TTE_hospitalization_BCG_only.txt">Download here</a>
 

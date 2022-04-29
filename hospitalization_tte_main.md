@@ -27,5 +27,5 @@ The model was established to analyse time-to-first hospitalization (all causes) 
 
 - [Command](./hospitalization_TTE/Command_txt)
 
-- [Readme.txt](./hospitalization_TTE/readme_txt)
+- [Readme file](./hospitalization_TTE/readme_txt)
 
