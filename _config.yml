@@ -6,12 +6,12 @@ navigation:
   - title: Home
     url: /
   - title: Time-to-first hospitalization (all causes)
-    url: hosp_main
+    url: hospitalization_tte_main
   - title: Time-to-first PCR confirmed COVID-19
-    url: upd
+    url: c19_tte_main
   - title: Time-to-first respiratory tract infection
-    url: upd
+    url: rti_tte_main
   - title: Respiratory tract infection over time Markov model
-    url: upd
+    url: rti_markov_main
   - title: About
-    url: upd
+    url: about_main
