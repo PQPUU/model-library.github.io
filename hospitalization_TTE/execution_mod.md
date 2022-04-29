@@ -146,4 +146,4 @@ $TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
 
 [Back](../hospitalization_tte_main)
 
-[Home](/)
+[Home](~)
