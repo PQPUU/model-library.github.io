@@ -141,10 +141,5 @@ $TABLE      ID TIME SUR HAZNOW BASE RFGROUP EVID NOPRINT ONEHEADER
 ;$SIMULATION (5988566) (39978 UNIFORM) ONLYSIM NOPREDICTION NSUB = 1
 ;Sim_end
 ```
-[Back](hosp_main)
-
-[Back](./hosp_main)
 
 [Back](../hosp_main)
-
-[Back](https://github.com/LaurynasMockeliunas/lm.github.io/blob/23443c8cbe586d98d623636d7b996a27e947e379/hosp_main)
