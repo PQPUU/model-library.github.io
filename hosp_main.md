@@ -19,7 +19,7 @@ Data analyzed was from the BCG Vaccination for Healthcare Workers in COVID-19 Pa
 
 - [Simulated dataset](./hospitalization_TTE/Simulated_data_dat)
 
-- [Dataset preparation script](./hospitalization_TTE/ataset_preparation_r)
+- [Dataset preparation script](./hospitalization_TTE/dataset_preparation_r)
 
 - [Dataset example](./hospitalization_TTE/example_dataset_csv)
 
