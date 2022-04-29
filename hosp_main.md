@@ -15,3 +15,5 @@ Data analyzed was from the BCG Vaccination for Healthcare Workers in COVID-19 Pa
 
 [Model code](./test)
 
+[Model code](./hospitalization_TTE/execution_mod)
+
