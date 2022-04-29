@@ -1,5 +1,8 @@
 # Time-to-first hospitalization
 ## Simulation model
+
+<a href="./Simulations_TTE_hospitalization_BCG_only.mod">style.css</a>
+
 ```
 $PROBLEM    Time-to-event analysis of hospitalization (all causes)
 ;           data,ITT dataset
