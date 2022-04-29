@@ -7,3 +7,9 @@ navigation:
     url: /
   - title: Time-to-first hospitalization (all causes)
     url: hosp_main
+  - title: Time-to-first PCR confirmed COVID-19
+    url: upd
+  - title: Time-to-first respiratory tract infection
+    url: upd
+  - title: Respiratory tract infection over time Markov model
+    url: upd
