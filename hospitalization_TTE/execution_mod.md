@@ -2,7 +2,7 @@
 
 ## Execution model
 
-<a download="download" href="https://lm.github.io/blob/cd00f8952147f0d5b5421b542c8437973151a9a7/hospitalization_TTE/Executable_TTE_hospitalization_BCG_only.mod">Download File</a>
+<a download="download" href="https://raw.githubusercontent.com/LaurynasMockeliunas/lm.github.io/master/hospitalization_TTE/simtab.dat">Download File</a>
 
 ```
 $PROBLEM    Time-to-event analysis of hospitalization (all causes) data, ITT dataset
