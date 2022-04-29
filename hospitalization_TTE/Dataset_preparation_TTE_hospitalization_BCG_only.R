@@ -22,4 +22,4 @@ df <- rbind(df %>% mutate(TIME = 0, #initiation record with time zero
   select(ID, DV, TIME, EVID, TYPE, FTIME, GROUP) #selecting desired columns
 
 #creating a dataset
-write.csv(df, "TOTALHOSP_ITT_simulated.csv", quote = F, row.names = F)
+write.csv(df, "Simulated_dataset_TTE_hospitalization_BCG_only.csv", quote = F, row.names = F)
