@@ -1,9 +1,9 @@
-# Time-to-first respiratory tract infection
+# Respiratory tract infection over time Markov model
 -------------------------
 
 ### Short description
 
-The model was established to analyse time-to-first respiratory tract infection data using parametric time-to-event analysis.
+The model was established to analyse respiratory tract infection data over time using Markov model.
 
 ### Characteristics
 - Data source:
@@ -13,19 +13,13 @@ The model was established to analyse time-to-first respiratory tract infection d
 
 ### Files
 
-- [Execution model code](./RTI_TTE/execution_mod)
+- [Execution model code](./RTI_MARKOV/execution_mod)
 
-- [Model output](./RTI_TTE/Output_lst)
+- [Model output](./RTI_MARKOV/Output_lst)
 
-- [Simulation model code](./RTI_TTE/Simulation_mod)
+- [Dataset example](./RTI_MARKOV/example_dataset_csv)
 
-- [Simulated dataset](./RTI_TTE/Simulated_data_dat)
+- [Command](./RTI_MARKOV/Command_txt)
 
-- [Dataset preparation script](./RTI_TTE/dataset_preparation_r)
-
-- [Dataset example](./RTI_TTE/example_dataset_csv)
-
-- [Command](./RTI_TTE/Command_txt)
-
-- [Readme.txt](./RTI_TTE/readme_txt)
+- [Readme.txt](./RTI_MARKOV/readme_txt)
 
