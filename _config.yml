@@ -3,8 +3,8 @@ title: Model library
 description: Pharmacometric model library
 show_downloads: FALSE
 navigation:
-    - title: Home
-      url: /
+  - title: Home
+    url: /
     - title: Time-to-first hospitalization (all causes)
       url: hospitalization_tte_main
     - title: Time-to-first PCR confirmed COVID-19
