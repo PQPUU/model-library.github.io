@@ -30,7 +30,8 @@ df <- rbind(df %>% mutate(TIME = 0, #initiation record with time zero
 
 #creating a dataset
 write.csv(df, "Simulated_dataset_TTE_COVID-19_BCG_only.csv", quote = F, row.names = F)
-  
 ```
 
 [Back](../c19_tte_main)
+
+[Home](../../model-library.github.io/)
