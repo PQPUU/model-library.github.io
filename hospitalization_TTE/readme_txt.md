@@ -3,6 +3,8 @@
 ## Readme.txt file
 
 <a href="./readme_TTE_hospitalization_BCG_only.txt">Download here</a>
+<a href="./Simulated_raw_data_TTE_hospitalization_BCG_only.dat">Download here</a>
+
 
 ```
 Data: Data will be made available upon completion of all secondary analyses.
